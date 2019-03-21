@@ -49,7 +49,6 @@ public class AgregarAmigoActivity extends AppCompatActivity {
                 //Agregar amigo a DB local
                 db.createAmigo(amigo);
 
-
                 ArrayList<Amigo> lista = db.getAllAmigos();
                 for(int i=0 ; i<lista.size() ; i++){
                     Log.e(">>>",lista.get(i).getNombre());
