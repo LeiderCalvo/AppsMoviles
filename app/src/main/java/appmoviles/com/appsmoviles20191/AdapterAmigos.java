@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import appmoviles.com.appsmoviles20191.model.Amigo;
+
 public class AdapterAmigos extends RecyclerView.Adapter<AdapterAmigos.CustomViewHolder> {
 
-    ArrayList<Object> data;
+    ArrayList<Amigo> data;
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout root;
@@ -34,8 +36,14 @@ public class AdapterAmigos extends RecyclerView.Adapter<AdapterAmigos.CustomView
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        ((TextView) holder.root.findViewById(R.id.nombre)).setText(data.get(position).getParam1());
-        ((TextView) holder.root.findViewById(R.id.fecha)).setText(data.get(position).getParam2());
+        ((TextView) holder.root.findViewById(R.id.renglon_amigo_nombre)).setText(data.get(position).getNombre());
+        ((TextView) holder.root.findViewById(R.id.renglon_amigo_telefono)).setText(data.get(position).getTelefono());
+        holder.root.findViewById(R.id.renglon_amigo_btn_call).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
