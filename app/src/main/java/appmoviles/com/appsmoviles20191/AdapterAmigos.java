@@ -15,6 +15,13 @@ public class AdapterAmigos extends RecyclerView.Adapter<AdapterAmigos.CustomView
 
     ArrayList<Amigo> data;
 
+    public void showAllAmigos(ArrayList<Amigo> allAmigos) {
+        for(int i = 0 ; i<allAmigos.size() ; i++){
+            if(!data.contains(allAmigos.get(i))) data.add(allAmigos.get(i));
+        }
+        notifyDataSetChanged();
+    }
+
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout root;
         public CustomViewHolder(LinearLayout v) {

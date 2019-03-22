@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="10dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre apellido"
-            android:textStyle="bold"
-            android:id="@+id/renglon_amigo_nombre"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/renglon_amigo_telefono"
-            android:text="+570000000000"/>
+            <TextView
+                android:id="@+id/renglon_amigo_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre apellido"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/renglon_amigo_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="+570000000000" />
+
+        </LinearLayout>
 
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text="C"
-        android:layout_alignParentRight="true"
-        android:id="@+id/renglon_amigo_btn_call"
-        android:layout_centerVertical="true"/>
+        <Button
+            android:id="@+id/renglon_amigo_btn_call"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="C" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -59,4 +59,12 @@ public class Amigo {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Amigo){
+            return this.id.equals(((Amigo) obj).id);
+        }
+        return false;
+    }
 }
