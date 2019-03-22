@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        
         txt_singup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
