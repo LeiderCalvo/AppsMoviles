@@ -1,12 +1,16 @@
 package appmoviles.com.appsmoviles20191;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -16,16 +20,24 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView lista_amigos;
     private Button btn_agregar;
-
     DBHandler localdb;
     private AdapterAmigos adapterAmigos;
     FirebaseAuth auth;
     private Button btn_signout;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        }, 0);
 
         localdb = DBHandler.getInstance(this);
         auth = FirebaseAuth.getInstance();
@@ -75,5 +87,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         adapterAmigos.showAllAmigos(localdb.getAllAmigos());
     }
+
+
+
 }
 

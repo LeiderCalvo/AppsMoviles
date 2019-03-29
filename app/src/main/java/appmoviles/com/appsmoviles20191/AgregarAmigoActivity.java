@@ -1,14 +1,24 @@
 package appmoviles.com.appsmoviles20191;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -17,6 +27,7 @@ import appmoviles.com.appsmoviles20191.model.Amigo;
 
 public class AgregarAmigoActivity extends AppCompatActivity {
 
+    private static final int CAMERA_CALLBACK_ID = 100;
     private EditText et_nombre;
     private EditText et_edad;
     private EditText et_correo;
@@ -24,11 +35,20 @@ public class AgregarAmigoActivity extends AppCompatActivity {
     private Button btn_agregar_amigo;
     DBHandler db;
 
+    private ImageView img_amigo;
+    private Button btn_take_pic;
+    private File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_amigo);
+
+
+        //Si no pongo esto entonces va a salir el URIFileExposedException
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
 
         db = DBHandler.getInstance(this);
 
@@ -37,6 +57,9 @@ public class AgregarAmigoActivity extends AppCompatActivity {
         et_correo = findViewById(R.id.et_correo);
         et_telefono = findViewById(R.id.et_telefono);
         btn_agregar_amigo = findViewById(R.id.btn_agregar_amigo);
+        img_amigo = findViewById(R.id.image_amigo);
+        btn_take_pic = findViewById(R.id.btn_take_pic);
+
 
         btn_agregar_amigo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +79,29 @@ public class AgregarAmigoActivity extends AppCompatActivity {
 
             }
         });
+
+        btn_take_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                photoFile = new File(Environment.getExternalStorageDirectory() + "/"+UUID.randomUUID().toString()+".png");
+                Uri uri = Uri.fromFile(photoFile);
+                i.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(i, CAMERA_CALLBACK_ID);
+            }
+        });
+
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //Luego de tomar la foto y guardarla
+        if(requestCode == CAMERA_CALLBACK_ID  && resultCode == RESULT_OK){
+            Bitmap imagen = BitmapFactory.decodeFile(photoFile.toString());
+            img_amigo.setImageBitmap(imagen);
+        }
     }
 
     //Cargamos
