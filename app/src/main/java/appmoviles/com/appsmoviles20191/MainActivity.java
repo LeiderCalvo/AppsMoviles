@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import appmoviles.com.appsmoviles20191.db.DBHandler;
 
@@ -25,12 +26,20 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     private Button btn_signout;
 
+    FirebaseDatabase rtdb;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        rtdb = FirebaseDatabase.getInstance();
+
+        //rtdb.getReference().child("alfa").child("beta").child("gamma").setValue("Mi primer valor");
+
 
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.CALL_PHONE,

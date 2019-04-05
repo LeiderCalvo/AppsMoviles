@@ -9,6 +9,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/et_signup_nombre"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_signup_tel"
+        android:hint="Telefono"
+        android:inputType="phone"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/et_signup_correo"
         android:hint="Correo"/>
 
