@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //Respuesta de FireBase == response, Asincrono
                                 for (DataSnapshot hijo : dataSnapshot.getChildren()){
                                     Amigo a = hijo.getValue(Amigo.class);
+                                    localdb.createAmigo(a);
                                 }
                             }
 
