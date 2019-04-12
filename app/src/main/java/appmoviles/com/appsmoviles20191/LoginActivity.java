@@ -14,6 +14,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,12 +26,14 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login_login;
     private TextView txt_singup;
     FirebaseAuth auth;
+    FirebaseDatabase rtdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
+        rtdb = FirebaseDatabase.getInstance();
 
         et_login_correo = findViewById(R.id.et_login_correo);
         et_login_pass = findViewById(R.id.et_login_pass);
@@ -42,6 +48,20 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        //Ya estmaos logueados
+                        rtdb.getReference().child("friend").child(auth.getCurrentUser().getUid())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();

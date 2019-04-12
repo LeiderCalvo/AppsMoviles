@@ -91,11 +91,11 @@ public class AgregarAmigoActivity extends AppCompatActivity {
                         et_nombre.getText().toString(),
                         et_edad.getText().toString(),
                         et_telefono.getText().toString(),
-                        et_correo.getText().toString());
+                        et_correo.getText().toString(), auth.getCurrentUser().getUid());
                 //Agregar amigo a DB local
                 db.createAmigo(amigo);
 
-                ArrayList<Amigo> lista = db.getAllAmigos();
+                ArrayList<Amigo> lista = db.getAllAmigosofUser(auth.getCurrentUser().getUid());
                 for(int i=0 ; i<lista.size() ; i++){
                     Log.e(">>>",lista.get(i).getNombre());
                 }
