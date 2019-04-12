@@ -85,5 +85,8 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void deleteAmigosofUser(String uid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_AMIGOS + " WHERE "+AMIGOS_USERID+"=''");
+        db.close();
     }
 }
