@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import appmoviles.com.appsmoviles20191.db.DBHandler;
+import appmoviles.com.appsmoviles20191.model.Amigo;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText et_login_correo;
@@ -27,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txt_singup;
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
+    DBHandler localdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
         rtdb = FirebaseDatabase.getInstance();
+
+        localdb = DBHandler.getInstance(this);
 
         et_login_correo = findViewById(R.id.et_login_correo);
         et_login_pass = findViewById(R.id.et_login_pass);
@@ -53,7 +59,10 @@ public class LoginActivity extends AppCompatActivity {
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                                //Respuesta de FireBase == response, Asincrono
+                                for (DataSnapshot hijo : dataSnapshot.getChildren()){
+                                    Amigo a = hijo.getValue(Amigo.class);
+                                }
                             }
 
                             @Override
