@@ -19,6 +19,12 @@
         android:text="Tomar foto"
         android:id="@+id/btn_take_pic"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="galeria"
+        android:id="@+id/btn_open_gal"/>
+
 
     <EditText
         android:layout_width="match_parent"
