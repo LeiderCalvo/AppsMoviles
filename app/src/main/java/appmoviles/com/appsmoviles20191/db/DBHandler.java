@@ -84,4 +84,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    public void deleteAmigosofUser(String uid) {
+    }
 }

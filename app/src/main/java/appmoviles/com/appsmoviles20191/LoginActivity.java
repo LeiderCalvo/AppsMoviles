@@ -54,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+
+                        localdb.deleteAmigosofUser(auth.getCurrentUser().getUid());
+
                         //Ya estmaos logueados
                         rtdb.getReference().child("friend").child(auth.getCurrentUser().getUid())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
